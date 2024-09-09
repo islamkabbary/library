@@ -1,21 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Books</title>
-</head>
+@push('style')
+    <script src="https://cdn.tailwindcss.com"></script>
+@endpush
 
-<body>
+@section('title')
+    Show All Books
+@endsection
+@section('content')
+    <div class="grid grid-cols-4 gap-5 p-5">
+        @foreach ($books as $book)
+            <a href="{{ route('books.show', ['id' => $book->id]) }}" class="bg-orange-500 rounded text-center text-white p-3">
+                <h1 class="font-bold my-2 text-2xl underline">{{ $book->title }}</h1>
+                <p>{{ $book->decs }}</p>
+            </a>
+        @endforeach
+        {{ $books->links() }}
+    </div>
+@endsection
 
-    @foreach ($books as $book)
-        <h1>{{ $books->title }}</h1>
-        <p>{{ $books->decs }}</p>
-    @endforeach
 
 
-</body>
-
-</html>
+@push('script')
+    <script src="{{ asset('js/main.js') }}"></script>
+@endpush
