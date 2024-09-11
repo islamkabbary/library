@@ -31,27 +31,13 @@
                 @enderror
             </div>
             @if ($book->img)
-                {{-- <img src="{{ asset('storage/' . $book->img) }}"> --}}
+            <img src="{{ asset("storage/".$book->img) }}">
             @endif
             <div class="mb-4">
                 <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Book Image:</label>
                 <input type="file" id="image" name="image"
                     class="form-input mt-1 block w-full rounded-md shadow-sm focus:outline-none border border-black/15 p-2 @error('image') border-2 border-red-800 @enderror">
                 @error('image')
-                    <div class="p-2 bg-red-300 rounded my-2">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-4">
-                <label for="category_id" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
-                <select name="category_id[]" multiple
-                    class="form-input mt-1 block w-full rounded-md shadow-sm focus:outline-none border border-black/15 p-2">
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" @if (in_array($category->id, $book->categories()->pluck('category_id')->toArray())) selected @endif>
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('category_id')
                     <div class="p-2 bg-red-300 rounded my-2">{{ $message }}</div>
                 @enderror
             </div>

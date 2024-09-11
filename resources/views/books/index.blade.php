@@ -11,6 +11,9 @@
     <div class="grid grid-cols-4 gap-5 p-5">
         @foreach ($books as $book)
             <a href="{{ route('books.show', ['id' => $book->id]) }}" class="bg-orange-500 rounded text-center text-white p-3">
+                @if ($book->img)
+                    <img src="{{ asset('storage/' . $book->img) }}">
+                @endif
                 <h1 class="font-bold my-2 text-2xl underline">{{ $book->title }}</h1>
                 <p>{{ $book->decs }}</p>
             </a>

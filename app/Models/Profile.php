@@ -5,23 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Profile extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['title', 'decs', 'img'];
-
-
 
     function author()
     {
         return $this->belongsTo(Author::class, 'author_id', 'id');
-    }
-
-
-
-    function categories()
-    {
-        return $this->belongsToMany(Category::class)->withPivot('qty_books');
     }
 }

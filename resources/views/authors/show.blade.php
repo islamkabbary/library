@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Show Book - {{ $book ? $book->title : null }}
+    Show Author - {{ $author ? $author->title : null }}
 @endsection
 
 @push('style')
@@ -9,11 +9,9 @@
 @endpush
 
 @section('content')
-    @if ($book)
+    @if ($author)
         <div class="bg-orange-500 rounded text-center text-white p-3">
-            <h1 class="font-bold my-2 text-2xl underline">{{ $book->title }}</h1>
-            <p>{{ $book->decs }}</p>
-            <p>Author : {{ $book->author->name }}</p>
+            <h1 class="font-bold my-2 text-2xl underline">{{ $author->name }}</h1>
         </div>
     @endif
 @endsection
