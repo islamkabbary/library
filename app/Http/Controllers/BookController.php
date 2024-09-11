@@ -103,11 +103,14 @@ class BookController extends Controller
         $book->update([
             'title' => $request->title,
             'decs' => $request->description,
-            'img' => $path_img ?? null,
+            'img' => $path_img ?? $old_img,
         ]);
-        dd($book->categories);
         foreach ($request->category_id as $cat_id) {
-            $book->categories()->updateExistingPivot($cat_id, ['qty_books' => 10]);
+            if ($book->categories()->where('category_id', $cat_id)->exists()) {
+                $book->categories()->updateExistingPivot($cat_id, ['qty_books' => 12]);
+            } else {
+                $book->categories()->attach($cat_id, ['qty_books' => 10]);
+            }
         }
         // $book->title = $request->title;
         // $book->decs = $request->description;
