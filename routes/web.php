@@ -5,13 +5,18 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 
 Route::get('/', function () {
+    dD(app()->getLocale());
     return view('welcome');
 });
 
+Route::get('/change_lang/{lang}', function ($lang) {
+    session()->put('lang',$lang);
+    return redirect()->back();
+});
 
 
 // Books
-Route::controller(BookController::class)->prefix('books')->group(function () {
+Route::controller(BookController::class)->prefix('books')->middleware('lang')->group(function () {
     // update
     Route::post('/update/{id}', 'update')->name("books.update");
     Route::get('/edit/{id}', 'edit')->name("books.edit");
@@ -39,3 +44,7 @@ Route::controller(AuthorController::class)->prefix('authors')->group(function ()
     Route::get('', 'index')->name("authors");
     Route::get('/{id}', 'show')->name('authors.show');
 });
+
+
+
+

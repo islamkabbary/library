@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="container p-6 w-1/2 mx-auto">
-        <h1 class="text-3xl font-semibold mb-6">Add New Book</h1>
+        <h1 class="text-3xl font-semibold mb-6">{{ __('messages.Add New Book') }}</h1>
         <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
             @csrf
             <div class="mb-4">
