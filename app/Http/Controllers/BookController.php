@@ -24,6 +24,7 @@ class BookController extends Controller
     {
         // $book = Book::findOrFail($id);
         $book = Book::find($id);
+        dD($book);
         return view('books.show', ['book' => $book]);
     }
 
@@ -43,14 +44,14 @@ class BookController extends Controller
         $request->validate([
             'title' => "required|string|max:100",
             'description' => "required|string",
-            "image" => "required|image|mimes:png,jpg|max:1024",
-            'author_id' => "required|exists:authors,id",
+            // "image" => "required|image|mimes:png,jpg|max:1024",
+            // 'author_id' => "required|exists:authors,id",
         ], [
             'title.required' => "the title is Req.",
             'title.max' => "max char",
         ]);
-        $name_img = time() . "_book_" . $request->file('image')->getClientOriginalName();
-        $path_img = Storage::disk('public')->putFileAs('images/books', $request->image, $name_img);
+        // $name_img = time() . "_book_" . $request->file('image')->getClientOriginalName();
+        // $path_img = Storage::disk('public')->putFileAs('images/books', $request->image, $name_img);
 
         // DB::insert('insert into books (title, decs, img) values (?, ?, ?)', ["$request->title", "$request->description", "$path_img"]);
 
@@ -58,16 +59,16 @@ class BookController extends Controller
         $book = new Book();
         $book->title = $request->title;
         $book->decs  = $request->description;
-        $book->img   = $path_img;
-        $book->author_id   = $request->author_id;
+        // $book->img   = $path_img;
+        // $book->author_id   = $request->author_id;
         $book->save();
-        foreach ($request->category_id as $cat_id) {
-            $book->categories()->attach($cat_id, ['qty_books' => 5]);
-            // id = 1
-            // book_id = 10
-            // category_id = 1
-        }
-        return back();
+        // foreach ($request->category_id as $cat_id) {
+        //     $book->categories()->attach($cat_id, ['qty_books' => 5]);
+        //     // id = 1
+        //     // book_id = 10
+        //     // category_id = 1
+        // }
+        // return back();
         // Book::create([
         //     'title' => $request->title,
         //     'decs' => $request->description,

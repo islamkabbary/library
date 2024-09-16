@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     dD(app()->getLocale());
@@ -10,8 +11,7 @@ Route::get('/', function () {
 });
 
 Route::get('/change_lang/{lang}', function ($lang) {
-    session()->put('lang',$lang);
-    return redirect()->back();
+    app()->setLocale($lang);
 });
 
 
@@ -46,5 +46,14 @@ Route::controller(AuthorController::class)->prefix('authors')->group(function ()
 });
 
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+require __DIR__.'/auth.php';
