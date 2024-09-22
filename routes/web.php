@@ -1,18 +1,20 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    dD(app()->getLocale());
     return view('welcome');
 });
 
 Route::get('/change_lang/{lang}', function ($lang) {
     app()->setLocale($lang);
 });
+
+
 
 
 // Books
@@ -56,3 +58,22 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+require __DIR__.'/auth.php';
+
+
+
+
+Route::get('show-my-register', [AuthController::class, 'show_my_register'])->name('show_my_register');
+Route::Post('my-register', [AuthController::class, 'my_register'])->name('my_register');
+
+Route::get('show-my-login', [AuthController::class, 'show_my_login'])->name('show_my_login');
+Route::Post('my-login', [AuthController::class, 'my_login'])->name('my_login');
+
+Route::get('show-my-forget-password', [AuthController::class, 'show_my_forget_password']);
+Route::Post('my-forget-password', [AuthController::class, 'send_reset'])->name('my_forget_password');
+
+
+Route::Post('my-logout', [AuthController::class, 'my_logout'])->name('my_logout');
