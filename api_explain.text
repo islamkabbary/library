@@ -1,0 +1,16 @@
+API ( Application program interface )
+--------------------------------------
+
+Interface
+
+
+1- mobile app
+2- single page app
+3- share data
+
+
+JSON
+
+
+
+php artisan install:api
