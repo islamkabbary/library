@@ -1,4 +1,0 @@
-composer remove laravel/breeze
-npm uninstall tailwindcss alpinejs
-composer dump-autoload
-npm install && npm run dev
