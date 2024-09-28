@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +15,8 @@ class BookResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "title_book" => $this->title,
-            "decs_book" => $this->decs,
-            "book_image" => $this->img,
-            "name_auther" => $this->author_id ? Author::find($this->author_id)->name : null,
+            'name' => $this->name,
+            'email' => $this->email,
         ];
     }
 }

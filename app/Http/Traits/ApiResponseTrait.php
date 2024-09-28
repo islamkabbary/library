@@ -10,6 +10,6 @@ trait ApiResponseTrait
             'data' => $data,
             'message' => $message,
         ];
-        return response($res, $status);
+        return response()->json($res,$status);
     }
 }

@@ -14,3 +14,36 @@ JSON
 
 
 php artisan install:api
+
+
+----------------------------------------------------------
+JWT
+----
+
+composer require tymon/jwt-auth
+
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+
+ php artisan jwt:secret
+
+implements JWTSubject
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+    ],
