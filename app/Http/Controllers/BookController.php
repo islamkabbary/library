@@ -7,14 +7,14 @@ use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
     function index()
     {
-        // dd(Book::all());
-        $books = Book::paginate(3);
+        $books = Book::where('id',1)->withTrashed()->restore();
         return view('books.index', ['books' => $books]);
         // return view('books.index')->with('books',$books);
         // return view('books.index', compact('books'));
@@ -128,5 +128,13 @@ class BookController extends Controller
         }
         $book->delete();
         return to_route('books');
+
+
+
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage() . $th->getLine() . $th->file());
+        }
     }
 }

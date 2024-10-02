@@ -1,0 +1,357 @@
+Query Builder (direct sql statement)
+------------------------------------
+$books = DB::table('books')->get();
+
+$books = DB::table('books')->where('id', 1)->first();
+
+DB::table('books')->insert([
+    'title' => 'Title Book Query Builder',
+    'decs' => 'Decs Book Query Builder',
+]);
+
+---------------------------------------------------------
+Eloquent ORM (Object-Relational Mapping)
+----------------------------------------
+$books = Book::all();
+
+$books = Book::find(1);
+$books = Book::findOrFail(1);
+
+$books = Book::findMany([1,2]);
+
+$book = new Book;
+$book->name = 'Title Book Query Builder';
+$book->email = 'Decs Book Query Builder';
+$book->save();
+
+---------------------------------------------------------
+where
+-----
+$books = Book::where('id',1)->first();
+$books = Book::where('id',1)->exists();
+
+$books = Book::where('id',1)->get();
+$books = Book::where('id','>',1)->take(5)->get(); // Eloquent Only
+$books = Book::where('id','>',1)->limit(5)->get(); // Eloquent and Query Builder
+$books = Book::where('id','>=',1)->count();
+
+$books = Book::where('id',1)->orWhare('id',5)->get();
+
+$books = Book::where(function ($query) {
+        $query->where('id', 1)
+              ->orWhere('id', 5)
+              ->orWhere('title', 'update');
+    })->get();
+
+
+$books = Book::where('id',1)->orWhare('id',5)->orWhare('title','update')->get();
+
+$books = Book::where('title','like','%update%')->get();
+
+$books = Book::whereId(1)->get();
+$books = Book::whereTitle('title)->get();
+$books = Book::whereAuthorId(2)->get();
+
+$books = Book::whereIn('id',[1,2])->get();
+$books = Book::whereNotIn([1,2])->get();
+
+$books = Book::whereNull('author_id')->get();
+$books = Book::whereNotNull('author_id')->get();
+
+$books = Book::whereBetween('id', [1, 3])->get();
+Book::where('id', '>', 1)->where('id', '<', 3)->get();
+
+$books = Book::whereNotBetween('id', [1, 3])->get();
+
+
+
+$books = Book::whereNotBetween('id', [1, 3])->sum('id);
+$books = Book::whereNotBetween('id', [1, 3])->max();
+
+$books = Book::firstWhere('title', 'update');
+---------------------------------------------------------
+whereHas
+--------
+$books = Book::whereHas('author', function ($query) {
+    $query->where('id', 1);
+})->get();
+
+
+
+
+
+
+
+
+
+
+$books = Book::whereHas('author', function ($query) {
+    $query->whereHas('profile',function($q){
+        $q->where('author_id',1);
+    });
+})->get();
+
+$books = Book::whereHas('author.profile', function ($query) {
+        $query->where('author_id',1);
+})->get();
+Book::whereHas('author.profile')->get();
+
+
+$books = Book::join('authors', 'books.author_id', '=', 'authors.id')
+->join('profiles', 'authors.id', '=', 'profiles.auther_id')
+->select('books.title', 'authors.name', 'profiles.*')
+->get();
+
+
+
+
+
+
+
+
+
+
+
+
+
+Task => Insert two books, two authors, and one profile for one of the authors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$author1 = Author::create([
+    'name' => 'Author One'
+]);
+
+$author2 = Author::create([
+    'name' => 'Author Two'
+]);
+
+$book1 = Book::create([
+    'title' => 'Book One Title',
+    'decs' => 'Description of Book One',
+    'img' => 'book_one_image.jpg',
+    'author_id' => $author1->id
+]);
+
+$book2 = Book::create([
+    'title' => 'Book Two Title',
+    'decs' => 'Description of Book Two',
+    'img' => 'book_two_image.jpg',
+    'author_id' => $author2->id
+]);
+
+$profile = Profile::create([
+    'author_id' => $author1->id,
+]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

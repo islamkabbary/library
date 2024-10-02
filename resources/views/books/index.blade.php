@@ -16,9 +16,12 @@
                 @endif
                 <h1 class="font-bold my-2 text-2xl underline">{{ $book->title }}</h1>
                 <p>{{ $book->decs }}</p>
+                @if ($book->deleted_at)
+                <p>deleted({{$book->deleted_at}})</p>
+                @endif
             </a>
         @endforeach
-        {{ $books->links() }}
+        {{-- {{ $books->links() }} --}}
     </div>
 @endsection
 

@@ -15,6 +15,6 @@ class Author extends Model
     }
 
     function profile() {
-        return $this->hasOne(Profile::class, 'author_id', 'id');
+        return $this->hasOne(Profile::class, 'auther_id', 'id');
     }
 }

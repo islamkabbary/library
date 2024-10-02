@@ -9,17 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('imagees', function (Blueprint $table) {
             $table->id();
-            // title varchar (100)
-            // decs text
-            // img varchar (150)
-            $table->string('title',100);
-            $table->text('decs');
-            $table->string('img',150)->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('imagees');
     }
 };

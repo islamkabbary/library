@@ -1,0 +1,11 @@
+Lifecycle
+---------
+pulic document root file
+1- Request Handling => index.php
+2- Laravel (Bootstraping) => settings and base file
+3- Service Providers Registration => config/app.php => providers.php
+4- Request Preparation => Illuminate\Http\Request
+5- Middleware Processing
+6- Routing
+7- Controller
+8- Response => View
